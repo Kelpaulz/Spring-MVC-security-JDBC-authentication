@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+</head>
+<body>
+<h2>KC's company home page</h2>
+<hr>
+<P>Welcome to our company's home page</P>
+<!--Display userId-->
+<p>User: <span sec:authentication="principal.username"></span>
+</p>
+<hr>
+
+<!--Display user Role-->
+<p>Role: <span sec:authentication="principal.authorities"></span>
+</p>
+
+<hr>
+
+<div sec:authorize="hasRole('MANAGER')">
+    <p>
+    <!--Add a link to point to /leader-->
+    <a th:href="@{/leaders}">Leadership Meeting</a>
+    (Only for Manager peeps)
+</p>
+</div>
+
+
+<div sec:authorize="hasRole('ADMIN')">
+    <p>
+    <!--Add a link to point to /systems-->
+    <a th:href="@{/systems}">For IT systems Meeting</a>
+    (Only for Users with Admin roles)
+</p>
+</div>
+
+
+<!--adding logout button for homepage-->
+<p>
+<form action="#" th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+</p>
+
+</body>
+</html>
